@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+	<title>mixi export</title>
+<style type="text/css">
+<!-- 
+body
+{
+	background-color:	#fff;
+	color:			#000;
+	margin-left:		auto;
+	margin-right:		auto;
+	margin-top:		0px;
+	min-width:		400px;
+	line-height:		130%;
+
+	/* for IE */
+	_word-break:		break-all;
+	_word-wrap:		break-word;
+	_font-size:		12pt;
+	_width:			98%;
+}
+/* 見出し */
+h1
+{
+	font-size:		160%;
+	font-weight:		normal;
+	border-bottom:		2px solid #2133a9;
+	padding:		4px 1em 4px 0.5em;
+	margin:			0.5em 0em 1em 0em;
+}
+/* 日記部 */
+div.main {
+/*	margin-left:		17%;	*/
+	margin-left:		2em;
+	margin-right:		2em;
+	padding:		0px 8px 0px 8px;
+/*	min-height:		320px;	*/
+}
+/* 左側にメニューを配置 */
+div.sidebar
+{
+	position:		absolute;
+	left:			0px;
+	top:			0px;
+	width:			16%;
+	margin:			0;
+	padding:		0;
+
+	font-size:		85%;
+	line-height:		130%;
+}
+/* フッタの配置 */
+hr.footer {
+	margin-top:		3em;
+}
+div.footer
+{
+	text-align:		right;
+	margin:			0 0 0 0;
+	font-size:		80%;
+	line-height:		120%;
+}
+
+/*--------------------------------------------------------------------
+■記事のデザイン配置（本文）
+---------------------------------------------------------------------*/
+/* 1つの記事 */
+article {
+	padding:		0px 8px 0px 8px;
+	margin:			0em 1em 1.5em 0em;
+}
+/* 記事タイトル */
+h2 {
+	background-color:	#adb8ff;		/* $c=main2 = auto:main */
+	padding:		2px 8px 2px 8px;
+	font-size:		100%;
+	margin:			0px;
+
+	border:			2px solid #6b75b8;	/* $c=border */
+	border-bottom:		none;
+	border-radius:		8px 8px 0 0;
+	box-shadow:		10px 10px 10px rgba(0,0,0,0.4);
+}
+/* 記事本文 */
+article div.body {
+	background-color:	#fff;
+	font-size:		90%;
+	line-height:		140%;
+	margin:			0px;
+	padding:		0.5em 1em 0.5em 1.5em;
+
+	border:			2px solid #6b75b8;
+	border-top:		none;
+	border-radius:		0 0 8px 8px;
+	box-shadow:		10px 10px 10px rgba(0,0,0,0.4);
+}
+
+/* 記事中のセクション */
+div.section {
+	margin-top: 		0.5%;
+	margin-bottom:		3%;
+}
+div.day form {
+	margin:			0px;
+	padding:		0px;
+}
+
+/*--------------------------------------------------------------------
+■リンク配色
+---------------------------------------------------------------------*/
+a:link		{ color: #0000ff; }
+a:visited	{ color: #551a8b; }
+
+/*--------------------------------------------------------------------
+■フォントサイズ基本設定
+---------------------------------------------------------------------*/
+.xx-large		{ font-size: 200%; line-height: 130%; }
+.x-large,  .huge	{ font-size: 150%; line-height: 130%; }
+.large			{ font-size: 130%; line-height: 130%; }
+.midium, .normalsize	{ font-size: 100%; line-height: 135%; }
+.small			{ font-size: 90%;  line-height: 140%; }
+.x-small,  .tiny	{ font-size: 80%;  line-height: 140%; }
+.xx-small, .scriptsize	{ font-size: 50%;  line-height: 140%; }
+
+/****************************************************************************/
+/****************************************************************************/
+/*--------------------------------------------------------------------
+●記事：基本設定
+---------------------------------------------------------------------*/
+/* 見出し */
+div.body h3 {
+	font-size:		120%;
+	font-weight:		bold;
+	padding:		4px 0px 4px 8px;
+	border-left:		6px solid #6b75b8;
+	background-color:	#e8e8ff;
+
+	border-radius:		0 6px 6px 0;
+	box-shadow:		4px 4px 2px 2px rgba(0,0,0, 0.4);
+}
+
+div.body p {
+	text-indent:		1em;
+	margin:			0.7em 0.5em 0.7em 0;
+}
+blockquote, pre, div.box {
+	margin:			0.5em 2em 0.5em 2em;
+	padding:		0.5em 1.5em;
+	border:			none;
+	border-radius:		6px;
+}
+div.body blockquote p {
+	margin:			0.2em 0.5em 0.2em 0;
+}
+pre {
+	background-color:	#eaefff;
+}
+
+/* pre 中コメント */
+pre span.comment	{ color: #b50; }
+pre strong.comment	{ color: #b50; font-weight: bold; }
+
+.mono, .pre {
+	font-family:		monospace;
+}
+
+strong {
+	font-weight: bold;
+	color: #f00;
+}
+em {
+	font-style: normal;
+	color: #f00;
+}
+dd {
+	margin-top:	0.8em;
+	margin-bottom:	0.8em;
+}
+
+/*--------------------------------------------------------------------
+●記事：テーブル
+---------------------------------------------------------------------*/
+div.body table {
+	font-size:		inherit;
+	margin:			0.5em 1em 0.5em 1em;
+	border-collapse:	separate;
+	border-spacing:		2px;
+	empty-cells:		show;
+}
+div.body table tr {
+	margin:			0px;
+	padding:		0px;
+}
+div.body table td {
+	margin:			0px;
+	padding:		2px;
+	border-bottom:		1px dashed #000;
+}
+div.body table th {
+	font-weight:		bold;
+	margin:			0px;
+	padding:		2px;
+	border-bottom:		1px solid #000;
+	background-color:	#ccf;
+}
+-->
+</style>
+</head>
+<body>
+
+<!--タイトル部==============================================================-->
+<h1>mixi export</h1>
+
+<!--内容====================================================================-->
+<div class="main">
+
+<!--==========================================================-->
+<article>
+<h2>mixi exportとは？</h2>
+	<div class="body">
+	<p>mixi の日記とコメントのログを<a href="https://adiary.org/">adiary</a>で取り込める形式に変換するツールです。adiaryのエクスポート機能を使用することにより、Movable Type形式やJUGEM形式といったログを得ることも可能になります。
+	<ul>
+		<li>Windows用実行ファイル mixi_export.exe は ActivePerl + PAR にてパッケージ化したものです。
+		<li>Perlインストール環境向けの mixi_export.pl を実行する場合は、Perl 5.8.1 以降が必要です。
+	</ul>
+	<p>利用は個人の責任でお願いします（無保証）。なお、本ツールに関して mixi に問い合わせることはおやめください。全くの無関係です。</p>
+
+	<h3>変更履歴</h3>
+	<ul>
+	<li>2019/05/30 出力XMLにて記事タイトルが取得できない問題を修正。log-data.htmlを生成するよう変更。</li>
+	<li>2018/10/03 安定性向上。</li>
+	<li>2018/09/27 接続が途中で切れると無限ループに陥るバグを修正。alarm処理の修正。</li>
+	<li>2018/09/22 記事のリンク形式が変わっていたので対応。HTMLを直接開くと大きい写真が表示されない問題を修正。</li>
+	<li>2018/09/15 <em>reCAPTCHA 導入に伴いログイン方法を proxy 型に変更。</em></li>
+	<li>2017/11/21 HTTP/GETリクエストに失敗していたので修正。</li>
+	<li>2017/10/02 ひと月に31件以上ある時、2ページ目を読み込めなくなっていた問題を修正。</li>
+	<li>2017/04/17 日記内画像の書き換えに対応。その他修正。</li>
+	<li>2017/04/14 非公開記事への対応。日記に付随する3枚までの画像ファイルに対応。</li>
+	<li>2016/07/08 ログインできなくなっていたので修正。パーサをadiary Ver3用に修正。</li>
+	<li>2015/01/21 ログインにhttpsが必須になっていたので対応しました。</li>
+	<li>2015/01/06 HTML仕様変更に対応。</li>
+	<li>2010/10/07 コメント欄の仕様変更に対応。</li>
+	<li>2009/08/24
+	<ul>
+		<li>mixiの仕様変更に対応しました。</li>
+		<li>携帯投稿記事の改行が消える問題に対応しました。</li>
+		<li><a href="http://www.google.co.jp/search?lr=lang_ja&amp;ie=utf-8&amp;oe=utf-8&amp;q=Unicode%e5%a4%89%e6%8f%9b%e8%a1%a8%e5%95%8f%e9%a1%8c" class="tag google" title="Google検索 ">Unicode変換表問題</a>（"～"等の文字化け）に対応しました。</li>	</ul>
+	</li>
+	<li>2008/03/06 月の記事数が60を越えるとき60件までしか取得できない問題を修正しました。</li>
+	<li>2007/10/21 月の記事数が30を越えるとき無限ループになる問題を修正しました。</li>
+	<li>2007/10/08 mixiの仕様変更に対応しました。</li>
+	<li>2007/01/05 各記事の保存ファイル名を日付がわかりやすいように変更しました（バージョンアップ時は旧ログは一度削除し再度取得し直してください）。また再取得範囲の決定方式を変更しました。</li>
+	<li>2006/12/30 １記事に51件以上コメントがあるときもきちんと取得できるようにしました。</li>
+	<li>2006/12/28 ひと月あたり31件目以降の日記が取得できない問題を修正しました。</li>
+	<li>2006/12/27 mixiの仕様変更に対応しました（コメントの解析に失敗していました）。</li>
+	<li>2006/12/17 mixiの仕様変更に対応しました（日記本文の解析に失敗していました）。</li>
+	<li>2006/07/26 初版</li>
+	</ul>
+
+	</div>
+</article>
+
+
+<!--==========================================================-->
+<article>
+<h2>使用方法</h2>
+	<div class="body">
+
+	<h3>使い方</h3>
+
+	<ol>
+		<li>実行すると、内蔵の HTTP/HTTPS proxy が起動します。</li>
+		<li>表示されたメッセージに従い、ブラウザの proxy を設定します。
+		<ul>
+			<li>通常は 127.0.0.1 の 8888 ポートになります。</li>
+		</ul></li>
+		<li>proxyを設定後 <a href="https://mixi.jp/">https://mixi.jp/</a> にアクセスし、ログインします。</li>
+		<li>ログインに成功すると、mixiの通常画面ではなく成功画面が表示されます。</li>
+		<li>proxyの設定を解除して、ツールの動作が終わるのを待ってください。</li>
+	</ol>
+
+	<p>補足</p>
+
+	<ul>
+		<li>2018年9月にmixiに導入された「reCAPTCHA」は自動ロボット避けのシステムです。ソフトから自動的にログインすることが困難になったため、proxy型のソフトになりました。</li>
+		<li>将来的に<strong>mixi全体がhttps化した場合これ以上の対応は不可能</strong>です。まだ使えるうちにご利用ください。</li>
+	</ul>
+
+	<h3>コマンドラインオブション</h3>
+	<p>mixi_export.exe/pl を -h オブション付きで実行すると次のようなヘルプが表示されます。</p>
+<pre>
+Usage: mixi_export.exe [options] [output_xml_file]
+Available options are:
+  -c charset	画面出力時の文字コードを指定します
+  -p port	ポート番号を指定します（default:8888）
+  -g		mixi に接続しログを取得します (default)
+  -n		mixi に接続せずに、セーブされたログを処理します
+  -s sec	sleepする時間を指定します（単位：秒）(default:3)
+  -l log_dir	ログを保存するディレクトリを指定します
+  -?|-h		このヘルプを表示します
+</pre>
+	<table><thead>
+	<tr><th nowrap>オプション</th><th>補足説明</th></tr>
+	</thead><tbody>
+	<tr>
+		<td>-c charset</td>
+		<td>画面に出力するメッセージの文字コード。Windows環境ではShift_JIS、UNIX系環境では環境変数 LANG を参照し設定されます。</td>
+	</tr>
+	<tr>
+		<td>-p port</td>
+		<td>proxyとして起動するポート番号を指定します。デフォルト: 8888</td>
+	</tr>
+	<tr>
+		<td>-s sec</td>
+		<td>mixiからデータを取得する時間間隔（sleep時間）を秒で設定します。デフォルトでは3秒になっており、１つの記事を取得してから次の記事を取得するまで指定した秒数だけ休みます。</td>
+	</tr>
+	<tr>
+		<td>-l log_dir</td>
+		<td>ログを保存するディレクトリを指定します。./log がデフォルトです。</td>
+	</tr>
+	</tbody></table>
+
+	<h3>実行オプションのサンプル</h3>
+	<p>mixiに接続せずに、すでに取得してあるログファイルを再処理し、mixi_export.xml に出力します。</p>
+<pre>
+mixi_export -n mixi_export.xml
+</pre>
+	<p>mixiに接続時の sleep 時間を2秒に設定します。</p>
+<pre>
+mixi_export -s2
+</pre>
+	</div>
+</article>
+
+
+<!--==========================================================-->
+<article>
+<h2>FAQ</h2>
+	<div class="body">
+	<dl>
+		<dt>●接続が遅いので、sleep 時間を１秒にしても良いですか？</dt>
+		<dd>ゆっくりとデータを取得しますので、（mixi側が接続を拒否するまでsleepしない）backup_mixi と比べて動作が遅いと感じるかも知れません。このようなツールで自動的にログを取得する際（ロボット）は、相手サーバの迷惑にならないようにゆっくり取得するのが礼儀だとお考えください。<strong>あまり短いsleep時間を設定することはmixi利用者全員の迷惑となります</strong>。</dd>
+
+		<dt>●うまく動作しません</dt>
+		<dd>接続できないのであればネットワーク環境を疑ってください。接続できていのるであれば、mixiの出力データの仕様が変わった可能性があります（ご連絡いただければ多分対応します）。</dd>
+
+		<dt>●頻繁にエクスポートしておく方がいいですか？</dt>
+		<dd>迷惑ですからやめましょう。<strong>mixiのログをどこかに移したい</strong>と思ったときに１回だけ使えばいいと思います。</dd>
+	</dl>
+
+	</div>
+</article>
+
+
+<!--End of body ============================================================-->
+</div> <!-- End of main -->
+
+</body></html>
